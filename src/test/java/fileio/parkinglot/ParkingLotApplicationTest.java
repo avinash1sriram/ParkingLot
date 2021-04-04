@@ -33,6 +33,8 @@ public class ParkingLotApplicationTest {
     @Rule
     public ExpectedException thrownExpectedException = ExpectedException.none();
 
+
+
     /*********  Creating Parking Lot Test cases started  **********/
 
     @Test
@@ -389,7 +391,39 @@ public class ParkingLotApplicationTest {
 
     /*********SlotNumberWhichAreDrivenByDriversOfParticularAge Test cases ended  **********/
 
-    private void initialiseTheParkingLotForTesting(ParkingService instance) throws ParkingLotException {
+    /********** validating the car number started*****/
+
+    @Test
+    public void testCarNumberValidationOnLength() throws Exception {
+
+        thrownExpectedException.expect(ParkingLotException.class);
+        thrownExpectedException.expectMessage(is("registrationNumber value is incorrect"));
+
+        VehicleDetails vehicleDetails = new CarDetails("KA-01-HH-12345");
+    }
+
+    @Test
+    public void testCarNumberValidationOnState() throws Exception {
+
+        thrownExpectedException.expect(ParkingLotException.class);
+        thrownExpectedException.expectMessage(is("registrationNumber value is incorrect"));
+
+        VehicleDetails vehicleDetails = new CarDetails("K1-01-HH-1234");
+    }
+
+    @Test
+    public void testCarNumberValidationOnLast4DigitNumber() throws Exception {
+
+        thrownExpectedException.expect(ParkingLotException.class);
+        thrownExpectedException.expectMessage(is("registrationNumber value is incorrect"));
+
+        VehicleDetails vehicleDetails = new CarDetails("K1-01-HH-1A34");
+    }
+
+    /********** validating the car number ended*****/
+
+
+    private void initialiseTheParkingLotForTesting(ParkingService instance) throws Exception {
 
         instance.createParkingLot(6);
 

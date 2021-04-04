@@ -31,7 +31,7 @@ public class ParkingServiceImpl implements ParkingService {
     @Override
     public String createParkingLot(int capacity) throws ParkingLotException {
 
-        if (capacity < 0 || capacity > 1000) {
+        if (isItNotAValidCapacity(capacity)) {
             throw new ParkingLotException(ExceptionMessages.INVALID_VALUE.getMessage().replace("{variable}", "capacity"));
         }
 
@@ -81,7 +81,7 @@ public class ParkingServiceImpl implements ParkingService {
             throw new ParkingLotException(ExceptionMessages.NULL_OR_EMPTY.getMessage().replace("{variable}", "slotId"));
         }
 
-        if (slotId < 0L || slotId > 1000L) {
+        if (isItNotAValidSlotId(slotId)) {
             throw new ParkingLotException(ExceptionMessages.INVALID_VALUE.getMessage().replace("{variable}", "slotId"));
         }
 
@@ -108,7 +108,7 @@ public class ParkingServiceImpl implements ParkingService {
             throw new ParkingLotException(ExceptionMessages.NULL_OR_EMPTY.getMessage().replace("{variable}", "age"));
         }
 
-        if (age < 0L || age > 1000L) {
+        if (isNotAValidAge(age)) {
             throw new ParkingLotException(ExceptionMessages.INVALID_VALUE.getMessage().replace("{variable}", "age"));
         }
 
@@ -142,7 +142,7 @@ public class ParkingServiceImpl implements ParkingService {
             throw new ParkingLotException(ExceptionMessages.NULL_OR_EMPTY.getMessage().replace("{variable}", "vehicleRegistrationNumber"));
 
         }
-        
+
         BookedSlotDetails bookedSlotDetails = parkingLotDataManager.getSlotNumberGivenVehicleRegistrationNumber(vehicleRegistrationNumber);
 
         if(ObjectUtils.isEmpty(bookedSlotDetails)){
@@ -165,7 +165,7 @@ public class ParkingServiceImpl implements ParkingService {
             throw new ParkingLotException(ExceptionMessages.NULL_OR_EMPTY.getMessage().replace("{variable}", "age"));
         }
 
-        if (age < 0L || age > 1000L) {
+        if (isNotAValidAge(age)) {
             throw new ParkingLotException(ExceptionMessages.INVALID_VALUE.getMessage().replace("{variable}", "age"));
         }
 
@@ -189,4 +189,18 @@ public class ParkingServiceImpl implements ParkingService {
                 map(Object::toString).
                 collect(Collectors.joining(","));
     }
+
+    private boolean isNotAValidAge(Long age) {
+        return age <= 0L || age > 1000L;
+    }
+
+    private boolean isItNotAValidSlotId(Long slotId) {
+        return slotId <= 0L || slotId > 1000L;
+    }
+
+    private boolean isItNotAValidCapacity(int capacity) {
+
+        return capacity <= 0 || capacity >1000L;
+    }
+
 }
