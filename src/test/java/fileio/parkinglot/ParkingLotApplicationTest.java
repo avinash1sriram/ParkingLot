@@ -84,6 +84,24 @@ public class ParkingLotApplicationTest {
     }
 
     @Test
+    public void testAssignParkingSlotForAVehicleAgainAndAgain() throws Exception {
+
+        ParkingServiceImpl instance = new ParkingServiceImpl();
+        String obtainedOutput = instance.createParkingLot(6);
+        assertTrue("Createdparkingof6slots".equalsIgnoreCase(obtainedOutput.trim().replace(" ", "")));
+
+        VehicleDetails vehicleDetails = new CarDetails("KA-01-HH-1234");
+        DriverDetails driverDetails = new DriverDetails(21L);
+        String parkingVehicleOutput = instance.parkVehicle(vehicleDetails, driverDetails);
+        assertTrue("CarwithvehicleregistrationNumberKA-01-HH-1234hasbeenparkedatslotnumber1".equalsIgnoreCase(parkingVehicleOutput.trim().replace(" ", "")));
+
+        thrownExpectedException.expect(ParkingLotException.class);
+        thrownExpectedException.expectMessage(is("KA-01-HH-1234 is already parked"));
+
+        parkingVehicleOutput = instance.parkVehicle(vehicleDetails, driverDetails);
+    }
+
+    @Test
     public void testAssignParkingSlotForAVehicleWhenVehicleDetailsIsNull() throws Exception {
 
         ParkingServiceImpl instance = new ParkingServiceImpl();
