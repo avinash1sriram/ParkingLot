@@ -45,4 +45,20 @@ Running the project:
 
 -- then run the following command -  java -jar target/ParkingLot-1.0-SNAPSHOT.jar [Absolute path of input file]
 
+==================================================================================================
 
+Running the project in Intellij:
+
+-- Download the Intellij Idea
+
+-- Clone the project
+
+-- Open Idea and import the project
+
+-- Go to Run/Debug Configuration
+
+-- Click on application and add new application
+
+-- Set the main class as fileio.parkinglot.application.ParkingLotApplication
+
+-- In program arguments set the [Absolute path of input file]
