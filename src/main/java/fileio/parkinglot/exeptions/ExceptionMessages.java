@@ -8,10 +8,10 @@ public enum ExceptionMessages {
     NULL_OR_EMPTY("{variable} cannot be null or empty"),
     PROCESSING_ERROR("Processing error "),
     NO_VEHICLE_PARKED("No vehicle parked"),
+    VEHICLE_ALREADY_PARKED("{vehicleRegistrationNumber} is already parked"),
     INVALID_COMMAND("Invalid command ");
 
     private String message = "";
-
 
     ExceptionMessages(String message) {
         this.message = message;

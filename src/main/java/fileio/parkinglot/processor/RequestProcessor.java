@@ -21,7 +21,7 @@ public class RequestProcessor {
         this.parkingService = parkingService;
     }
 
-    public void validate(String input)throws ParkingLotException{
+    public void validateNumberOfArguments(String input)throws ParkingLotException{
 
         if (StringUtils.isEmpty(input))
             throw new ParkingLotException(ExceptionMessages.NULL_OR_EMPTY.getMessage().replace("{variable}", "input line"));

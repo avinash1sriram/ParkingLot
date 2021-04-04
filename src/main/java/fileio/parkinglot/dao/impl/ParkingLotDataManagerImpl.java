@@ -12,10 +12,8 @@ import fileio.parkinglot.parkingstrategies.ParkingStrategy;
 import fileio.parkinglot.utils.ObjectUtils;
 import fileio.parkinglot.utils.StringUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ParkingLotDataManagerImpl<T extends VehicleDetails> implements ParkingLotDataManager<T> {
 
@@ -63,6 +61,8 @@ public class ParkingLotDataManagerImpl<T extends VehicleDetails> implements Park
     * This method is used to change the entities that are related to park a vehicle
     * It will create a new booked slot details
     * Will remove the slot that is assigned from the free slots
+    *
+    * If the vehicle is already parked will throw and exception
     * */
 
     @Override
@@ -73,6 +73,17 @@ public class ParkingLotDataManagerImpl<T extends VehicleDetails> implements Park
         }
         if (ObjectUtils.isEmpty(driverDetails)) {
             throw new ParkingLotException(ExceptionMessages.NULL_OR_EMPTY.getMessage().replace("{variable}", "driverDetails"));
+        }
+
+        Set<String> parkedVehicleRegistrationNumbers = bookedSlotDetailsMap.values().stream().
+                map(BookedSlotDetails::getVehicleDetails).
+                map(VehicleDetails::getRegistrationNumber).
+                collect(Collectors.toSet());
+
+        if(parkedVehicleRegistrationNumbers.contains(vehicleDetails.getRegistrationNumber())){
+
+            throw new ParkingLotException(ExceptionMessages.VEHICLE_ALREADY_PARKED.getMessage().replace("{vehicleRegistrationNumber}",vehicleDetails.getRegistrationNumber()));
+
         }
 
         BookedSlotDetails bookedSlotDetails = null;

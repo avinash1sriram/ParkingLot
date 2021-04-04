@@ -24,6 +24,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class ParkingLotApplicationTest {
 
+
     private static final Long INVALID_AGE_VALUE = -6L;
 
     private static final Integer INVALID_CAPACITY_VALUE = -6;
@@ -199,7 +200,7 @@ public class ParkingLotApplicationTest {
         initialiseTheParkingLotForTesting(instance);
 
         String obtainedOutput = instance.leaveVehicle(3L);
-        assertTrue("Slotnumber3vacatedtheCarwithregistrationnumberC-01-HH-1234leftthespace,thedriverofthecarwasoftheage22".equalsIgnoreCase(obtainedOutput.trim().replace(" ", "")));
+        assertTrue("Slotnumber3vacatedtheCarwithregistrationnumberCC-01-HH-1234leftthespace,thedriverofthecarwasoftheage22".equalsIgnoreCase(obtainedOutput.trim().replace(" ", "")));
 
     }
 
@@ -215,8 +216,8 @@ public class ParkingLotApplicationTest {
         initialiseTheParkingLotForTesting(instance);
 
         List<String> expectedVehicleNumbers = new ArrayList<>();
-        expectedVehicleNumbers.add("B-01-HH-1234");
-        expectedVehicleNumbers.add("C-01-HH-1234");
+        expectedVehicleNumbers.add("BB-01-HH-1234");
+        expectedVehicleNumbers.add("CC-01-HH-1234");
 
         Collections.sort(expectedVehicleNumbers);
 
@@ -282,9 +283,9 @@ public class ParkingLotApplicationTest {
 
         initialiseTheParkingLotForTesting(instance);
 
-        String expectedOutPut = "carwithvehicleregistrationnumberC-01-HH-1234hasbeenparkedat3";
+        String expectedOutPut = "carwithvehicleregistrationnumberCC-01-HH-1234hasbeenparkedat3";
 
-        String obtainedOutput = instance.getSlotNumberGivenVehicleRegistrationNumber("C-01-HH-1234");
+        String obtainedOutput = instance.getSlotNumberGivenVehicleRegistrationNumber("CC-01-HH-1234");
 
         assertTrue(expectedOutPut.equalsIgnoreCase(obtainedOutput.replace(" ", "")));
 
@@ -398,15 +399,15 @@ public class ParkingLotApplicationTest {
 
         instance.leaveVehicle(1L);
 
-        vehicleDetails = new CarDetails("A-01-HH-1234");
+        vehicleDetails = new CarDetails("AA-01-HH-1234");
         driverDetails = new DriverDetails(21L);
         instance.parkVehicle(vehicleDetails, driverDetails);
 
-        vehicleDetails = new CarDetails("B-01-HH-1234");
+        vehicleDetails = new CarDetails("BB-01-HH-1234");
         driverDetails = new DriverDetails(22L);
         instance.parkVehicle(vehicleDetails, driverDetails);
 
-        vehicleDetails = new CarDetails("C-01-HH-1234");
+        vehicleDetails = new CarDetails("CC-01-HH-1234");
         driverDetails = new DriverDetails(22L);
         instance.parkVehicle(vehicleDetails, driverDetails);
     }

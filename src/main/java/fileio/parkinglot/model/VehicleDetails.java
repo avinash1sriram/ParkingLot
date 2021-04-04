@@ -1,5 +1,7 @@
 package fileio.parkinglot.model;
 
+import fileio.parkinglot.exeptions.ParkingLotException;
+
 // This model will contain the common properties of the vehicles
 public abstract class VehicleDetails {
 
@@ -18,17 +20,24 @@ public abstract class VehicleDetails {
     }
 
     public VehicleDetails(String registrationNumber,
-                          String type) {
+                          String type) throws ParkingLotException {
+        validateVehicleRegistrationNumber(registrationNumber);
         this.registrationNumber = registrationNumber;
         this.type = type;
     }
+
+    protected abstract void validateVehicleRegistrationNumber(String registrationNumber) throws ParkingLotException;
 
     public String getRegistrationNumber() {
         return registrationNumber;
     }
 
-    public void setRegistrationNumber(String registrationNumber) {
+    public void setRegistrationNumber(String registrationNumber) throws ParkingLotException {
+
+        validateVehicleRegistrationNumber(registrationNumber);
+
         this.registrationNumber = registrationNumber;
+
     }
 
 

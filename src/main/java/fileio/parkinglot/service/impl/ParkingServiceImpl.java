@@ -31,7 +31,7 @@ public class ParkingServiceImpl implements ParkingService {
     @Override
     public String createParkingLot(int capacity) throws ParkingLotException {
 
-        if (capacity < 0) {
+        if (capacity < 0 || capacity > 1000) {
             throw new ParkingLotException(ExceptionMessages.INVALID_VALUE.getMessage().replace("{variable}", "capacity"));
         }
 
@@ -57,6 +57,7 @@ public class ParkingServiceImpl implements ParkingService {
         if (ObjectUtils.isEmpty(driverDetails)) {
             throw new ParkingLotException(ExceptionMessages.NULL_OR_EMPTY.getMessage().replace("{variable}", "driverDetails"));
         }
+
         BookedSlotDetails bookedSlotDetails = parkingLotDataManager.parkVehicle(vehicleDetails, driverDetails);
 
         if (ObjectUtils.isEmpty(bookedSlotDetails)) {
@@ -78,6 +79,10 @@ public class ParkingServiceImpl implements ParkingService {
 
         if (ObjectUtils.isEmpty(slotId)) {
             throw new ParkingLotException(ExceptionMessages.NULL_OR_EMPTY.getMessage().replace("{variable}", "slotId"));
+        }
+
+        if (slotId < 0L || slotId > 1000L) {
+            throw new ParkingLotException(ExceptionMessages.INVALID_VALUE.getMessage().replace("{variable}", "slotId"));
         }
 
         BookedSlotDetails bookedSlotDetails = parkingLotDataManager.leaveVehicle(slotId);
@@ -103,7 +108,7 @@ public class ParkingServiceImpl implements ParkingService {
             throw new ParkingLotException(ExceptionMessages.NULL_OR_EMPTY.getMessage().replace("{variable}", "age"));
         }
 
-        if (age < 0L) {
+        if (age < 0L || age > 1000L) {
             throw new ParkingLotException(ExceptionMessages.INVALID_VALUE.getMessage().replace("{variable}", "age"));
         }
 
@@ -137,7 +142,7 @@ public class ParkingServiceImpl implements ParkingService {
             throw new ParkingLotException(ExceptionMessages.NULL_OR_EMPTY.getMessage().replace("{variable}", "vehicleRegistrationNumber"));
 
         }
-
+        
         BookedSlotDetails bookedSlotDetails = parkingLotDataManager.getSlotNumberGivenVehicleRegistrationNumber(vehicleRegistrationNumber);
 
         if(ObjectUtils.isEmpty(bookedSlotDetails)){
@@ -160,7 +165,7 @@ public class ParkingServiceImpl implements ParkingService {
             throw new ParkingLotException(ExceptionMessages.NULL_OR_EMPTY.getMessage().replace("{variable}", "age"));
         }
 
-        if (age < 0L) {
+        if (age < 0L || age > 1000L) {
             throw new ParkingLotException(ExceptionMessages.INVALID_VALUE.getMessage().replace("{variable}", "age"));
         }
 

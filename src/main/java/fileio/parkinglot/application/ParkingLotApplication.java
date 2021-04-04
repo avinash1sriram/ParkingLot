@@ -29,7 +29,7 @@ public class ParkingLotApplication {
 
                 try {
                     input = input.trim();
-                    requestProcessor.validate(input);
+                    requestProcessor.validateNumberOfArguments(input);
                     System.out.println(requestProcessor.execute(input));
 
                 } catch (ParkingLotException ex) {
