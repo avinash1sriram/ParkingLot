@@ -32,6 +32,7 @@ public class AppTest {
     @Rule
     public ExpectedException thrownExpectedException = ExpectedException.none();
 
+    /*********  Creating Parking Lot Test cases started  **********/
 
     @Test
     public void createParkingLot() throws Exception {
@@ -49,7 +50,6 @@ public class AppTest {
         thrownExpectedException.expect(ParkingLotException.class);
         thrownExpectedException.expectMessage(is(ExceptionMessages.PARKING_ALREADY_EXIST.getMessage()));
         instance.createParkingLot(6);
-        
     }
 
     @Test
@@ -58,9 +58,12 @@ public class AppTest {
         thrownExpectedException.expect(ParkingLotException.class);
         thrownExpectedException.expectMessage(is("capacity value is incorrect"));
         instance.createParkingLot(INVALID_CAPACITY_VALUE);
-        
 
     }
+
+    /********* Creating Parking Lot Test cases ended  **********/
+
+    /********* Booking Parking Slot Test cases started  **********/
 
     @Test
     public void testAssignParkingSlotForAVehicle() throws Exception {
@@ -149,6 +152,10 @@ public class AppTest {
 
     }
 
+    /********* Booking Parking Slot Test cases ended  **********/
+
+    /********* Leaving Parking Slot Test cases started  **********/
+
     @Test
     public void testingLeavingTheVehicle() throws Exception {
 
@@ -188,8 +195,6 @@ public class AppTest {
     public void testingParkingAndLeavingMultipleVehicles() throws Exception {
 
         ParkingService instance = new ParkingServiceImpl();
-        String output = instance.createParkingLot(6);
-        assertTrue("Createdparkingof6slots".equalsIgnoreCase(output.trim().replace(" ", "")));
 
         initialiseTheParkingLotForTesting(instance);
 
@@ -198,12 +203,14 @@ public class AppTest {
 
     }
 
+    /********* Leaving Parking Slot Test cases ended  **********/
+
+    /*********VehicleNumberWhichAreDrivenByDriversOfParticularAge Test cases started  **********/
+
     @Test
     public void testingVehicleNumberWhichAreDrivenByDriversOfParticularAge() throws Exception {
 
         ParkingService instance = new ParkingServiceImpl();
-        String output = instance.createParkingLot(6);
-        assertTrue("Createdparkingof6slots".equalsIgnoreCase(output.trim().replace(" ", "")));
 
         initialiseTheParkingLotForTesting(instance);
 
@@ -222,14 +229,26 @@ public class AppTest {
     }
 
     @Test
-    public void testingVehicleNumberWhichAreDrivenByDriversOfParticularAgeWhenAgeIsNull() throws Exception {
+    public void testingVehicleNumberWhichAreDrivenByDriversOfParticularAgeButVehiclesAreNotPresent() throws Exception {
 
         ParkingService instance = new ParkingServiceImpl();
-        String output = instance.createParkingLot(6);
-        assertTrue("Createdparkingof6slots".equalsIgnoreCase(output.trim().replace(" ", "")));
 
         initialiseTheParkingLotForTesting(instance);
 
+        String expectedOutPut = "No vehicles were parked with the given driver age24";
+
+        String vehiclesNumbers = instance.getVehicleNumberWhichAreDrivenByDriversOfParticularAge(24L);
+
+        assertEquals(expectedOutPut, vehiclesNumbers);
+
+    }
+
+    @Test
+    public void testingVehicleNumberWhichAreDrivenByDriversOfParticularAgeWhenAgeIsNull() throws Exception {
+
+        ParkingService instance = new ParkingServiceImpl();
+
+        initialiseTheParkingLotForTesting(instance);
 
         thrownExpectedException.expect(ParkingLotException.class);
         thrownExpectedException.expectMessage(is("age cannot be null or empty"));
@@ -242,26 +261,72 @@ public class AppTest {
     public void testingVehicleNumberWhichAreDrivenByDriversOfParticularAgeWhenAgeValueIsInvalid() throws Exception {
 
         ParkingService instance = new ParkingServiceImpl();
-        String output = instance.createParkingLot(6);
-        assertTrue("Createdparkingof6slots".equalsIgnoreCase(output.trim().replace(" ", "")));
 
         initialiseTheParkingLotForTesting(instance);
-
 
         thrownExpectedException.expect(ParkingLotException.class);
         thrownExpectedException.expectMessage(is("age value is incorrect"));
 
-        instance.getVehicleNumberWhichAreDrivenByDriversOfParticularAge(-5L);
+        instance.getVehicleNumberWhichAreDrivenByDriversOfParticularAge(INVALID_AGE_VALUE);
 
     }
 
+    /*********VehicleNumberWhichAreDrivenByDriversOfParticularAge Test cases ended  **********/
+
+    /*********SlotNumberGivenVehicleRegistrationNumber Test cases started  **********/
+
+    @Test
+    public void testingSlotNumberGivenVehicleRegistrationNumber() throws Exception {
+
+        ParkingService instance = new ParkingServiceImpl();
+
+        initialiseTheParkingLotForTesting(instance);
+
+        String expectedOutPut = "carwithvehicleregistrationnumberC-01-HH-1234hasbeenparkedat3";
+
+        String obtainedOutput = instance.getSlotNumberGivenVehicleRegistrationNumber("C-01-HH-1234");
+
+        assertTrue(expectedOutPut.equalsIgnoreCase(obtainedOutput.replace(" ", "")));
+
+    }
+
+    @Test
+    public void testingSlotNumberGivenVehicleRegistrationNumberWhenNumberIsNull() throws Exception {
+
+        ParkingService instance = new ParkingServiceImpl();
+
+        initialiseTheParkingLotForTesting(instance);
+
+        thrownExpectedException.expect(ParkingLotException.class);
+        thrownExpectedException.expectMessage(is("vehicleRegistrationNumber cannot be null or empty"));
+
+        instance.getSlotNumberGivenVehicleRegistrationNumber(null);
+    }
+
+    @Test
+    public void testingSlotNumberGivenVehicleRegistrationNumberWhenVehicleDoesNotExists() throws Exception {
+
+        ParkingService instance = new ParkingServiceImpl();
+
+        initialiseTheParkingLotForTesting(instance);
+
+        String expectedOutPut = "NovehicleisparkedwiththegivenregistrationnumberC-01-HH-1235";
+
+        String obtainedOutput = instance.getSlotNumberGivenVehicleRegistrationNumber("C-01-HH-1235");
+
+        assertTrue(expectedOutPut.equalsIgnoreCase(obtainedOutput.replace(" ", "")));
+
+    }
+
+
+    /*********SlotNumberGivenVehicleRegistrationNumber Test cases ended  **********/
+
+    /*********SlotNumberWhichAreDrivenByDriversOfParticularAge Test cases started  **********/
 
     @Test
     public void testingSlotNumberWhichAreDrivenByDriversOfParticularAge() throws Exception {
 
         ParkingService instance = new ParkingServiceImpl();
-        String output = instance.createParkingLot(6);
-        assertTrue("Createdparkingof6slots".equalsIgnoreCase(output.trim().replace(" ", "")));
 
         initialiseTheParkingLotForTesting(instance);
 
@@ -279,60 +344,9 @@ public class AppTest {
     }
 
     @Test
-    public void testingSlotNumberGivenVehicleRegistrationNumber() throws Exception {
-
-        ParkingService instance = new ParkingServiceImpl();
-        String output = instance.createParkingLot(6);
-        assertTrue("Createdparkingof6slots".equalsIgnoreCase(output.trim().replace(" ", "")));
-
-        initialiseTheParkingLotForTesting(instance);
-
-        String expectedOutPut = "carwithvehicleregistrationnumberC-01-HH-1234hasbeenparkedat3";
-
-        String obtainedOutput = instance.getSlotNumberGivenVehicleRegistrationNumber("C-01-HH-1234");
-
-        assertTrue(expectedOutPut.equalsIgnoreCase(obtainedOutput.replace(" ", "")));
-
-    }
-
-    @Test
-    public void testingSlotNumberGivenVehicleRegistrationNumberWhenNumberIsNull() throws Exception {
-
-        ParkingService instance = new ParkingServiceImpl();
-        String output = instance.createParkingLot(6);
-        assertTrue("Createdparkingof6slots".equalsIgnoreCase(output.trim().replace(" ", "")));
-
-        initialiseTheParkingLotForTesting(instance);
-
-        thrownExpectedException.expect(ParkingLotException.class);
-        thrownExpectedException.expectMessage(is("vehicleRegistrationNumber cannot be null or empty"));
-
-        instance.getSlotNumberGivenVehicleRegistrationNumber(null);
-    }
-
-    @Test
-    public void testingSlotNumberGivenVehicleRegistrationNumberWhenVehicleDoesNotExists() throws Exception {
-
-        ParkingService instance = new ParkingServiceImpl();
-        String output = instance.createParkingLot(6);
-        assertTrue("Createdparkingof6slots".equalsIgnoreCase(output.trim().replace(" ", "")));
-
-        initialiseTheParkingLotForTesting(instance);
-
-        String expectedOutPut = "NovehicleisparkedwiththegivenregistrationnumberC-01-HH-1235";
-
-        String obtainedOutput = instance.getSlotNumberGivenVehicleRegistrationNumber("C-01-HH-1235");
-
-        assertTrue(expectedOutPut.equalsIgnoreCase(obtainedOutput.replace(" ", "")));
-
-    }
-
-    @Test
     public void testingSlotNumberWhichAreDrivenByDriversOfParticularAgeButVehiclesAreNotPresent() throws Exception {
 
         ParkingService instance = new ParkingServiceImpl();
-        String output = instance.createParkingLot(6);
-        assertTrue("Createdparkingof6slots".equalsIgnoreCase(output.trim().replace(" ", "")));
 
         initialiseTheParkingLotForTesting(instance);
 
@@ -348,8 +362,6 @@ public class AppTest {
     public void testingSlotNumberWhichAreDrivenByDriversOfParticularAgeWhenAgeIsNull() throws Exception {
 
         ParkingService instance = new ParkingServiceImpl();
-        String output = instance.createParkingLot(6);
-        assertTrue("Createdparkingof6slots".equalsIgnoreCase(output.trim().replace(" ", "")));
 
         initialiseTheParkingLotForTesting(instance);
 
@@ -364,8 +376,6 @@ public class AppTest {
     public void testingSlotNumberWhichAreDrivenByDriversOfParticularAgeWhenAgeValueIsInvalid() throws Exception {
 
         ParkingService instance = new ParkingServiceImpl();
-        String output = instance.createParkingLot(6);
-        assertTrue("Createdparkingof6slots".equalsIgnoreCase(output.trim().replace(" ", "")));
 
         initialiseTheParkingLotForTesting(instance);
 
@@ -376,7 +386,11 @@ public class AppTest {
 
     }
 
+    /*********SlotNumberWhichAreDrivenByDriversOfParticularAge Test cases ended  **********/
+
     private void initialiseTheParkingLotForTesting(ParkingService instance) throws ParkingLotException {
+
+        instance.createParkingLot(6);
 
         VehicleDetails vehicleDetails = new CarDetails("KA-01-HH-1234");
         DriverDetails driverDetails = new DriverDetails(21L);
