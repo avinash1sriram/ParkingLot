@@ -45,8 +45,8 @@ public class ParkingLotApplicationTest {
     @Test
     public void alreadyExistParkingLot() throws Exception {
         ParkingService instance = new ParkingServiceImpl();
-        String output = instance.createParkingLot(6);
-        assertTrue("Createdparkingof6slots".equalsIgnoreCase(output.trim().replace(" ", "")));
+        String obtainedOutput = instance.createParkingLot(6);
+        assertTrue("Createdparkingof6slots".equalsIgnoreCase(obtainedOutput.trim().replace(" ", "")));
         thrownExpectedException.expect(ParkingLotException.class);
         thrownExpectedException.expectMessage(is(ExceptionMessages.PARKING_ALREADY_EXIST.getMessage()));
         instance.createParkingLot(6);
@@ -69,8 +69,8 @@ public class ParkingLotApplicationTest {
     public void testAssignParkingSlotForAVehicle() throws Exception {
 
         ParkingServiceImpl instance = new ParkingServiceImpl();
-        String output = instance.createParkingLot(6);
-        assertTrue("Createdparkingof6slots".equalsIgnoreCase(output.trim().replace(" ", "")));
+        String obtainedOutput = instance.createParkingLot(6);
+        assertTrue("Createdparkingof6slots".equalsIgnoreCase(obtainedOutput.trim().replace(" ", "")));
 
         VehicleDetails vehicleDetails = new CarDetails("KA-01-HH-1234");
         DriverDetails driverDetails = new DriverDetails(21L);
@@ -84,8 +84,8 @@ public class ParkingLotApplicationTest {
     public void testAssignParkingSlotForAVehicleWhenVehicleDetailsIsNull() throws Exception {
 
         ParkingServiceImpl instance = new ParkingServiceImpl();
-        String output = instance.createParkingLot(6);
-        assertTrue("Createdparkingof6slots".equalsIgnoreCase(output.trim().replace(" ", "")));
+        String obtainedOutput = instance.createParkingLot(6);
+        assertTrue("Createdparkingof6slots".equalsIgnoreCase(obtainedOutput.trim().replace(" ", "")));
 
         thrownExpectedException.expect(ParkingLotException.class);
         thrownExpectedException.expectMessage(is("vehicleDetails cannot be null or empty"));
@@ -100,8 +100,8 @@ public class ParkingLotApplicationTest {
     public void testAssignParkingSlotForAVehicleWhenDriverDetailsIsNull() throws Exception {
 
         ParkingServiceImpl instance = new ParkingServiceImpl();
-        String output = instance.createParkingLot(6);
-        assertTrue("Createdparkingof6slots".equalsIgnoreCase(output.trim().replace(" ", "")));
+        String obtainedOutput = instance.createParkingLot(6);
+        assertTrue("Createdparkingof6slots".equalsIgnoreCase(obtainedOutput.trim().replace(" ", "")));
 
         thrownExpectedException.expect(ParkingLotException.class);
         thrownExpectedException.expectMessage(is("driverDetails cannot be null or empty"));
@@ -115,8 +115,8 @@ public class ParkingLotApplicationTest {
     public void assignParkingSlotForMultipleVehicles() throws Exception {
 
         ParkingService instance = new ParkingServiceImpl();
-        String output = instance.createParkingLot(6);
-        assertTrue("Createdparkingof6slots".equalsIgnoreCase(output.trim().replace(" ", "")));
+        String obtainedOutput = instance.createParkingLot(6);
+        assertTrue("Createdparkingof6slots".equalsIgnoreCase(obtainedOutput.trim().replace(" ", "")));
 
         VehicleDetails vehicleDetails1 = new CarDetails("KA-01-HH-1234");
         DriverDetails driverDetails1 = new DriverDetails(21L);
@@ -134,8 +134,8 @@ public class ParkingLotApplicationTest {
     public void assignParkingSlotsCompletelyAndTestingTheParkingFullCase() throws Exception {
 
         ParkingService instance = new ParkingServiceImpl();
-        String output = instance.createParkingLot(1);
-        assertTrue("Createdparkingof1slots".equalsIgnoreCase(output.trim().replace(" ", "")));
+        String obtainedOutput = instance.createParkingLot(1);
+        assertTrue("Createdparkingof1slots".equalsIgnoreCase(obtainedOutput.trim().replace(" ", "")));
 
         VehicleDetails vehicleDetails1 = new CarDetails("KA-01-HH-1234");
         DriverDetails driverDetails1 = new DriverDetails(21L);
@@ -160,8 +160,8 @@ public class ParkingLotApplicationTest {
     public void testingLeavingTheVehicle() throws Exception {
 
         ParkingService instance = new ParkingServiceImpl();
-        String output = instance.createParkingLot(1);
-        assertTrue("Createdparkingof1slots".equalsIgnoreCase(output.trim().replace(" ", "")));
+        String obtaintedOutput = instance.createParkingLot(1);
+        assertTrue("Createdparkingof1slots".equalsIgnoreCase(obtaintedOutput.trim().replace(" ", "")));
 
         VehicleDetails vehicleDetails1 = new CarDetails("KA-01-HH-1234");
         DriverDetails driverDetails1 = new DriverDetails(21L);
@@ -176,8 +176,8 @@ public class ParkingLotApplicationTest {
     @Test
     public void testingLeavingTheVehicleWhenSlotIdIsNull() throws Exception {
         ParkingService instance = new ParkingServiceImpl();
-        String output = instance.createParkingLot(1);
-        assertTrue("Createdparkingof1slots".equalsIgnoreCase(output.trim().replace(" ", "")));
+        String obtainedOutput = instance.createParkingLot(1);
+        assertTrue("Createdparkingof1slots".equalsIgnoreCase(obtainedOutput.trim().replace(" ", "")));
 
         VehicleDetails vehicleDetails1 = new CarDetails("KA-01-HH-1234");
         DriverDetails driverDetails1 = new DriverDetails(21L);
@@ -198,8 +198,8 @@ public class ParkingLotApplicationTest {
 
         initialiseTheParkingLotForTesting(instance);
 
-        String leaveVehicleOutput2 = instance.leaveVehicle(3L);
-        assertTrue("Slotnumber3vacatedtheCarwithregistrationnumberC-01-HH-1234leftthespace,thedriverofthecarwasoftheage22".equalsIgnoreCase(leaveVehicleOutput2.trim().replace(" ", "")));
+        String obtainedOutput = instance.leaveVehicle(3L);
+        assertTrue("Slotnumber3vacatedtheCarwithregistrationnumberC-01-HH-1234leftthespace,thedriverofthecarwasoftheage22".equalsIgnoreCase(obtainedOutput.trim().replace(" ", "")));
 
     }
 
@@ -222,9 +222,9 @@ public class ParkingLotApplicationTest {
 
         String expectedOutPut = String.join(",", expectedVehicleNumbers);
 
-        String vehiclesNumbers = instance.getVehicleNumberWhichAreDrivenByDriversOfParticularAge(22L);
+        String obtainedOutput = instance.getVehicleNumberWhichAreDrivenByDriversOfParticularAge(22L);
 
-        assertEquals(expectedOutPut, vehiclesNumbers);
+        assertEquals(expectedOutPut, obtainedOutput);
 
     }
 
@@ -237,9 +237,9 @@ public class ParkingLotApplicationTest {
 
         String expectedOutPut = "No vehicles were parked with the given driver age24";
 
-        String vehiclesNumbers = instance.getVehicleNumberWhichAreDrivenByDriversOfParticularAge(24L);
+        String obtainedOutput = instance.getVehicleNumberWhichAreDrivenByDriversOfParticularAge(24L);
 
-        assertEquals(expectedOutPut, vehiclesNumbers);
+        assertEquals(expectedOutPut, obtainedOutput);
 
     }
 
@@ -338,9 +338,9 @@ public class ParkingLotApplicationTest {
 
         String expectedOutPut = String.join(",", expectedVehicleNumbers);
 
-        String vehiclesNumbers = instance.getSlotNumberWhichAreDrivenByDriversOfParticularAge(22L);
+        String obtainedOutput = instance.getSlotNumberWhichAreDrivenByDriversOfParticularAge(22L);
 
-        assertEquals(expectedOutPut, vehiclesNumbers);
+        assertEquals(expectedOutPut, obtainedOutput);
     }
 
     @Test
