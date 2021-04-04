@@ -6,6 +6,7 @@ import fileio.parkinglot.model.CarDetails;
 import fileio.parkinglot.model.DriverDetails;
 import fileio.parkinglot.model.VehicleDetails;
 import fileio.parkinglot.service.ParkingService;
+import fileio.parkinglot.utils.ParkingCommandConstants;
 import fileio.parkinglot.utils.StringUtils;
 
 import static fileio.parkinglot.utils.ParkingCommandConstants.*;
@@ -14,8 +15,24 @@ public class RequestProcessor {
 
     private ParkingService parkingService;
 
+    public static final String COMMAND_DELIMITER = " ";
+
     public RequestProcessor(ParkingService parkingService) {
         this.parkingService = parkingService;
+    }
+
+    public void validate(String input)throws ParkingLotException{
+
+        if (StringUtils.isEmpty(input))
+            throw new ParkingLotException(ExceptionMessages.NULL_OR_EMPTY.getMessage().replace("{variable}", "input line"));
+
+        //Splitting the input string by space to get the command and arguments
+        String[] inputArguments = input.split(COMMAND_DELIMITER);
+
+        if(!COMMAND_VS_NUMBER_OF_ARGUMENTS_MAP.get(inputArguments[0]).equals(inputArguments.length)){
+            throw new ParkingLotException(ExceptionMessages.INVALID_COMMAND.getMessage());
+        }
+
     }
 
     public String execute(String input) throws ParkingLotException {
@@ -24,7 +41,7 @@ public class RequestProcessor {
             throw new ParkingLotException(ExceptionMessages.NULL_OR_EMPTY.getMessage().replace("{variable}", "input line"));
 
         //Splitting the input string by space to get the command and arguments
-        String[] inputArguments = input.split(" ");
+        String[] inputArguments = input.split(COMMAND_DELIMITER);
 
         //first word will be command as per the input format
         String command = inputArguments[0];

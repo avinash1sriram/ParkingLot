@@ -143,7 +143,7 @@ public class AppTest {
         assertTrue("CarwithvehicleregistrationNumberKA-01-HH-1234hasbeenparkedatslotnumber1".equalsIgnoreCase(parkingVehicleOutput.trim().replace(" ", "")));
 
         thrownExpectedException.expect(ParkingLotException.class);
-        thrownExpectedException.expectMessage(is(ExceptionMessages.PARKING_NOT_EXIST_ERROR.getMessage()));
+        thrownExpectedException.expectMessage(is(ExceptionMessages.PARKING_DOES_NOT_EXIST_ERROR.getMessage()));
 
         VehicleDetails vehicleDetails2 = new CarDetails("KA-02-HH-1234");
         DriverDetails driverDetails2 = new DriverDetails(22L);

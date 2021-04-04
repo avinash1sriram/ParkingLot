@@ -26,9 +26,10 @@ public class App {
 
             //Reading the lines in the input file one by one
             while ((input = bufferReader.readLine()) != null) {
-                try {
 
+                try {
                     input = input.trim();
+                    requestProcessor.validate(input);
                     System.out.println(requestProcessor.execute(input));
 
                 } catch (ParkingLotException ex) {

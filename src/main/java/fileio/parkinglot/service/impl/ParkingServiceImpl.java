@@ -61,7 +61,7 @@ public class ParkingServiceImpl implements ParkingService {
 
         if (ObjectUtils.isEmpty(bookedSlotDetails)) {
 
-            throw new ParkingLotException(ExceptionMessages.PARKING_NOT_EXIST_ERROR.getMessage());
+            throw new ParkingLotException(ExceptionMessages.PARKING_DOES_NOT_EXIST_ERROR.getMessage());
 
         }
 
