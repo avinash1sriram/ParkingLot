@@ -17,6 +17,4 @@ public interface ParkingService {
     String getSlotNumberGivenVehicleRegistrationNumber(String vehicleRegistrationNumber) throws ParkingLotException;
 
     String getSlotNumberWhichAreDrivenByDriversOfParticularAge(Long age) throws ParkingLotException;
-
-    void destroy();
 }

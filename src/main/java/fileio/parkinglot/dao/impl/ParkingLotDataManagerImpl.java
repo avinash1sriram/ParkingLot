@@ -205,16 +205,4 @@ public class ParkingLotDataManagerImpl<T extends VehicleDetails> implements Park
 
         return slotNumbers;
     }
-
-    /*
-    * Setting everything to null
-    * */
-    @Override
-    public void destroy()
-    {
-        this.parkingStrategy = null;
-        this.bookedSlotDetailsMap = null;
-        this.idVsSlotMap = null;
-        instance = null;
-    }
 }

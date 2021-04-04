@@ -19,6 +19,4 @@ public interface ParkingLotDataManager<T extends VehicleDetails> {
     BookedSlotDetails getSlotNumberGivenVehicleRegistrationNumber(String vehicleRegistrationNumber) throws ParkingLotException;
 
     List<Long> getSlotNumberWhichAreDrivenByDriversOfParticularAge(Long age) throws ParkingLotException;
-
-    void destroy();
 }

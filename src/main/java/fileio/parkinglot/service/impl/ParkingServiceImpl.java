@@ -184,17 +184,4 @@ public class ParkingServiceImpl implements ParkingService {
                 map(Object::toString).
                 collect(Collectors.joining(","));
     }
-
-    /*
-    * This method used to destory/reset the entire memory/objects that are created for operating the parking lot
-    * This method is used during the unit testing
-    * */
-
-    @Override
-    public void destroy() {
-
-        if(parkingLotDataManager != null)
-        parkingLotDataManager.destroy();
-
-    }
 }
