@@ -46,7 +46,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>fileio.parkinglot.application.App</mainClass>
+                            <mainClass>fileio.parkinglot.application.ParkingLotApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

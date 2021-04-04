@@ -20,9 +20,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Unit test for simple App.
+ * Unit test for simple ParkingLotApplication.
  */
-public class AppTest {
+public class ParkingLotApplicationTest {
 
     private static final Long INVALID_AGE_VALUE = -6L;
 

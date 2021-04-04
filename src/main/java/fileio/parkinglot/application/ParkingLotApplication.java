@@ -11,12 +11,12 @@ import java.io.FileReader;
 /**
  * Hello world!
  */
-public class App {
+public class ParkingLotApplication {
 
     public static void main(String[] args) {
 
         //args[0] - will be given in the command line. The args[0] absolute path of the file
-        File inputFile = new File("/Users/jumbotail/WorkSpace/ParkingLot/src/main/resources/input.txt");
+        File inputFile = new File(args[0]);
 
         RequestProcessor requestProcessor = new RequestProcessor(new ParkingServiceImpl());
 
